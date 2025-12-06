@@ -22,55 +22,55 @@ For the Version 1, it having some issues due cant be use to proceed the assignme
 
 # 📡 API Explanation
 1. add_pet.php
-Method: POST
+   Method: POST
 
-Description: Receives pet details and a JSON string of Base64 encoded images. It saves the text data to the database and converts Base64 strings into .png files stored in the server's asset folder.
+   Description: Receives pet details and a JSON string of Base64 encoded images. It saves the text data to the database and converts Base64 strings into .png files stored in the server's asset folder.
 
 Parameters:
-user_id: (int) ID of the user submitting the pet.
-pet_name: (String) Name of the pet.
-pet_type: (String) e.g., Dog, Cat.
-category: (String) e.g., Adoption, Rescue.
-description: (String) Details about the pet.
-lat: (double) Latitude.
-lng: (double) Longitude.
-image_paths: (String) JSON Encoded string containing a list of Base64 images.
+1. user_id: (int) ID of the user submitting the pet.
+2. pet_name: (String) Name of the pet.
+3. pet_type: (String) e.g., Dog, Cat.
+4. category: (String) e.g., Adoption, Rescue.
+5. description: (String) Details about the pet.
+6. lat: (double) Latitude.
+7. lng: (double) Longitude.
+8. image_paths: (String) JSON Encoded string containing a list of Base64 images.
 
 2. load_pets.php
-Method: GET
+   Method: GET
 
-Description: Fetches the list of pets from the database to display on the Main Screen.
+   Description: Fetches the list of pets from the database to display on the Main Screen.
 
-Parameters: Optional user_id to filter by user.
+   Parameters: Optional user_id to filter by user.
 
 # 📄 JSON Response Samples
 1. Success Response (add_pet.php)
-When the form is successfully submitted:
-{"status": "success","message": "Pet submitted successfully"}
+   When the form is successfully submitted:
+   {"status": "success","message": "Pet submitted successfully"}
 
 2. Error Response
-If required fields are missing or database insertion fails:
-{
-    "status": "failed",
-    "message": "Submit failed: Field 'image_paths' doesn't have a default value"
-}
+   If required fields are missing or database insertion fails:
+   {
+       "status": "failed",
+       "message": "Submit failed: Field 'image_paths' doesn't have a default value"
+   }
 
 3. Data Fetch Response (load_pets.php)
-Used to populate the ListView on the Main Page:
-{
-    "status": "success",
-    "data": [
-        {
-            "pet_id": "1",
-            "user_id": "15",
-            "pet_name": "Oyen",
-            "pet_type": "Cat",
-            "category": "Adoption",
-            "description": "Orange cat found near park.",
-            "image_paths": "pet_1_0.png,pet_1_1.png",
-            "lat": "6.4432",
-            "lng": "100.4321",
-            "created_at": "2025-12-06 10:00:00"
-        }
-    ]
-}
+   Used to populate the ListView on the Main Page:
+   {
+       "status": "success",
+       "data": [
+           {
+               "pet_id": "1",
+               "user_id": "15",
+               "pet_name": "Oyen",
+               "pet_type": "Cat",
+               "category": "Adoption",
+               "description": "Orange cat found near park.",
+               "image_paths": "pet_1_0.png,pet_1_1.png",
+               "lat": "6.4432",
+               "lng": "100.4321",
+               "created_at": "2025-12-06 10:00:00"
+           }
+       ]
+   }
