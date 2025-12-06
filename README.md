@@ -5,13 +5,13 @@ This is Version 2 of the PawPal Flutter mobile application. This update introduc
 
 For the Version 1, it having some issues due cant be use to proceed the assignment. So i have created this new version and copy the code from the version 1.
 
-🚀 Key Features
+# 🚀 Key Features
 1. Pet Submission Form: Text inputs, dropdowns, and validation.
 2. Multi-Image Upload: Supports selecting and uploading up to 3 images.
 3. Geolocation: Automatically captures the device's Latitude and Longitude.
 4. Backend Integration: Uses PHP and MySQL with manual file handling (file_put_contents)
 
-Setup for this project:
+# Setup for this project:
 1. This project is run in dart code, the flutter extendion is required to install(if using vsCode), installation link: https://docs.flutter.dev/install/with-vs-code
 2. This project using sql server(Xampp) to stored the data, make sure to install Xampp
 3. create the folder in the Xampp htdocs, 
@@ -20,7 +20,7 @@ Setup for this project:
 4. import the pawpal_db.sql into the sql server
 5. Find your PC's local IP address, open lib/myconfig.dart, and update the baseUrl with your local IP address
 
-📡 API Explanation
+# 📡 API Explanation
 1. add_pet.php
 Method: POST
 
@@ -43,7 +43,7 @@ Description: Fetches the list of pets from the database to display on the Main S
 
 Parameters: Optional user_id to filter by user.
 
-📄 JSON Response Samples
+# 📄 JSON Response Samples
 1. Success Response (add_pet.php)
 When the form is successfully submitted:
 {"status": "success","message": "Pet submitted successfully"}
