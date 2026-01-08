@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:pawpal_v2/views/register_screen.dart';
+import 'package:pawpal_v2/views/login_screen.dart';
 void main() {
   runApp(const MainApp());
 }
@@ -18,7 +18,7 @@ class MainApp extends StatelessWidget {
           foregroundColor: Colors.white,
         ),
       ),
-      home: RegisterScreen(),
+      home: LoginScreen(),
     );
   }
 }

@@ -3,7 +3,7 @@ import 'package:pawpal_v2/views/login_screen.dart';
 import 'package:pawpal_v2/models/user.dart';
 import 'package:pawpal_v2/views/main_screen.dart';
 import 'package:pawpal_v2/views/submit_pet_screen.dart';
-
+import 'package:pawpal_v2/shared/mydrawer.dart';
 class HomeScreen extends StatefulWidget {
   final User? user;
   const HomeScreen({super.key, required this.user});
@@ -49,6 +49,7 @@ class _HomeScreenState extends State<HomeScreen> {
         },
         child: Icon(Icons.add),
       ),
+      drawer: MyDrawer(user: widget.user),
     );
   }
 }

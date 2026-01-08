@@ -9,6 +9,8 @@ class Pet {
   String? lat;
   String? lng;
   String? createdAt;
+//updated field for owner name
+  String? username;
 
   Pet(
       {this.petId,
@@ -20,7 +22,9 @@ class Pet {
       this.imagePaths,
       this.lat,
       this.lng,
-      this.createdAt});
+      this.createdAt,
+      this.username
+      });
 
   Pet.fromJson(Map<String, dynamic> json) {
     petId = json['pet_id'];
@@ -33,6 +37,7 @@ class Pet {
     lat = json['lat'];
     lng = json['lng'];
     createdAt = json['created_at'];
+    username = json['name'];
   }
 
   Map<String, dynamic> toJson() {
@@ -47,6 +52,7 @@ class Pet {
     data['lat'] = lat;
     data['lng'] = lng;
     data['created_at'] = createdAt;
+    data['name'] = username;
     return data;
   }
 }

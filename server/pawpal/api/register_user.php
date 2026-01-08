@@ -7,7 +7,7 @@
 		echo json_encode(array('error' => 'Method Not Allowed'));
 		exit();
 	}
-	if (!isset($_POST['email']) || !isset($_POST['password']) || !isset($_POST['name']) || !isset($_POST['phone'])) {
+	if (!isset($_POST['profile_image']) || !isset($_POST['email']) || !isset($_POST['password']) || !isset($_POST['name']) || !isset($_POST['phone'])) {
 		http_response_code(400);
 		echo json_encode(array('error' => 'Bad Request'));
 		exit();
@@ -18,6 +18,9 @@
 	$phone = $_POST['phone'];
 	$password = $_POST['password'];
 	$hashedpassword = sha1($password);
+	$encodeimage = $_POST['profile_image'];
+	$decodedimage = base64_decode($encodeimage);
+	
 	// Check if email already exists
 	$sqlcheckmail = "SELECT * FROM `tbl_users` WHERE `email` = '$email'";
 	$result = $conn->query($sqlcheckmail);
@@ -30,6 +33,15 @@
 	$sqlregister = "INSERT INTO `tbl_users`(`name`, `email`, `password`, `phone`) VALUES ('$name','$email','$hashedpassword', '$phone')";
 	try{
 		if ($conn->query($sqlregister) === TRUE){
+			$last_id = $conn->insert_id;
+			$filename = "user_profile_".$last_id.".png";
+			$path = "../assets/user_profile/".$filename;
+			file_put_contents($path, $decodedimage);
+
+			$sqlupdateimage = "UPDATE `tbl_users` SET `profile_image` = '$filename' WHERE `user_id` = '$last_id'";
+			$conn->query($sqlupdateimage);
+
+			// Registration successful
 			$response = array('status' => 'success', 'message' => 'Registration successful');
 			sendJsonResponse($response);
 		}else{

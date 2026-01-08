@@ -1,5 +1,5 @@
 <?php
-header("Access-Control-Allow-Origin: *"); // running as chrome app
+header("Access-Control-Allow-Origin: *"); 
 
 if ($_SERVER['REQUEST_METHOD'] == 'GET') {
 
@@ -37,7 +37,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET') {
     ";
 
     // Search logic
-    if (isset($_GET['search']) && !empty($_GET['search'])) {
+    if (isset($_GET['search'] ) && !empty($_GET['search'])) {
         $search = $conn->real_escape_string($_GET['search']);
         $sqlLoadPets = $baseQuery . "
             WHERE p.pet_name LIKE '%$search%' 
@@ -45,7 +45,10 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET') {
                OR p.category LIKE '%$search%'
                OR p.description LIKE '%$search%'
             ORDER BY p.pet_id DESC";
-    } else {
+    } else if (isset($_GET['type']) && !empty($_GET['type'])) {
+        $type = $conn->real_escape_string($_GET['type']);
+        $sqlLoadPets = $baseQuery . "WHERE p.pet_type = '$type' ORDER BY p.pet_id DESC";
+    }else {
         $sqlLoadPets = $baseQuery . " ORDER BY p.pet_id DESC";
     }
 

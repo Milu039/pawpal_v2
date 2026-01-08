@@ -1,8 +1,10 @@
 import 'dart:convert';
+import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'package:pawpal_v2/myconfig.dart';
 import 'package:pawpal_v2/views/login_screen.dart';
+import 'package:image_picker/image_picker.dart';
 
 class RegisterScreen extends StatefulWidget {
   const RegisterScreen({super.key});
@@ -21,7 +23,8 @@ class _RegisterScreenState extends State<RegisterScreen> {
 
   bool visible = false;
   bool isLoading = false;
-  
+  File? image;
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -31,6 +34,20 @@ class _RegisterScreenState extends State<RegisterScreen> {
         child: Center(
           child: Column(
             children: [
+              SizedBox(height: 40),
+              GestureDetector(
+                onTap: () => _pickImage(),
+                child: Container(
+                  child: previewImage(),
+                  width: 120,
+                  height: 120,
+                  decoration: BoxDecoration(
+                    shape: BoxShape.circle,
+                    border: Border.all(color: Colors.grey),
+                  ),
+                  
+                ),
+              ),
               SizedBox(height: 40),
               TextFormField(
                 controller: nameController,
@@ -122,6 +139,14 @@ class _RegisterScreenState extends State<RegisterScreen> {
     String password = passwordController.text.trim();
     String confirmPassword = confirmPasswordController.text.trim();
 
+    if (image == null) {
+      SnackBar snackBar = const SnackBar(
+        content: Text('Please take a picture'),
+      );
+      ScaffoldMessenger.of(context).showSnackBar(snackBar);
+      return;
+    }
+
     if (name.isEmpty ||
         email.isEmpty ||
         password.isEmpty ||
@@ -182,6 +207,8 @@ class _RegisterScreenState extends State<RegisterScreen> {
     String name,
     String phone,
   ) async {
+    String base64Image = base64Encode(image!.readAsBytesSync());
+
     setState(() {
       isLoading = true;
     });
@@ -208,6 +235,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
             'name': name,
             'phone': phone,
             'password': password,
+            'profile_image': base64Image,
           },
         )
         .then((response) {
@@ -263,6 +291,36 @@ class _RegisterScreenState extends State<RegisterScreen> {
       setState(() {
         isLoading = false;
       });
+    }
+  }
+
+  Future<void> _pickImage() async {
+    final ImagePicker picker = ImagePicker();
+    final XFile? pickedImage =
+        await picker.pickImage(source: ImageSource.camera, imageQuality: 80);
+    if (pickedImage != null) {
+      setState(() {
+        image = File(pickedImage.path);
+      });
+    }
+  }
+
+  Widget previewImage() {
+    if (image != null) {
+      return ClipOval(
+        child: Image.file(
+          File(image!.path),
+          width: 120,
+          height: 120,
+          fit: BoxFit.cover,
+        ),
+      );
+    } else {
+      return Icon(
+        Icons.camera_alt,
+        size: 50,
+        color: Colors.grey,
+      );
     }
   }
 }
