@@ -8,8 +8,7 @@ import 'package:pawpal_v2/views/main_screen.dart';
 import 'package:pawpal_v2/views/home_screen.dart';
 import 'package:pawpal_v2/views/MyProfile_screen.dart';
 import 'package:pawpal_v2/myconfig.dart';
-import 'package:pawpal_v2/views/my_donation_screen.dart';
-import 'package:pawpal_v2/views/mydonation_screen.dart';
+import 'package:pawpal_v2/views/donationhistory_screen.dart';
 
 class MyDrawer extends StatefulWidget {
   final User? user;
@@ -83,7 +82,7 @@ class _MyDrawerState extends State<MyDrawer> {
               Navigator.pop(context);
               Navigator.pushReplacement(
                 context,
-                AnimatedRoute.slideFromRight(MydonationScreen(user: widget.user)),
+                AnimatedRoute.slideFromRight(DonationHistoryScreen(user: widget.user)),
               );
             },
           ),
