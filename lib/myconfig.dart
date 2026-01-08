@@ -1,3 +1,3 @@
 class MyConfig {
-  static const String baseUrl = "https://canorcannot.com/JIACHING";
+  static const String baseUrl = "https://canorcannot.com/JIACHING/";
 }

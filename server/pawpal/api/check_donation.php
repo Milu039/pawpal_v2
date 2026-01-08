@@ -16,6 +16,8 @@ if($_SERVER['REQUEST_METHOD'] == 'POST') {
 
     $user_id = $_POST['user_id'];
     $pet_id = $_POST['pet_id'];
+    $selectedDonationType = $_POST['type'];
+    $donated = $_POST['donated'];
 
     // 1. Prepare and execute the ownership check
     $checkSql = "SELECT * FROM tbl_pets WHERE user_id = ? AND pet_id = ?";
@@ -31,8 +33,12 @@ if($_SERVER['REQUEST_METHOD'] == 'POST') {
             'message' => 'You are the owner of this pet. You cannot donate to your own listing.'
         ));
     } else {
-        // User IS NOT the owner - allow donation
-        // IMPORTANT: Flutter needs this "success" status to proceed to the payment screen
+        
+        $submitdonation = "INSERT INTO `tbl_donations`(`user_id`, `pet_id`, `category`, `donate`,) VALUES (?,?,?,?)";
+        $submitstmt = $conn->prepare($submitdonation);
+        $submitstmt->bind_param("iiss", $user_id, $pet_id, $selectedDonationType, $donated);
+        $submitstmt->execute();
+
         echo json_encode(array(
             'status' => 'success',
             'message' => 'Validation passed.'

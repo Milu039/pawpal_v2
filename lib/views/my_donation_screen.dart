@@ -120,7 +120,7 @@ class _MyDonationScreenState extends State<MyDonationScreen> {
     String foodDetail = foodDetailsController.text.trim();
     String medicalDetail = medicalDetailsController.text.trim();
     double moneyAmount = double.tryParse(moneyAmountController.text.trim()) ?? 0;
-    
+    String donated_item = "";
     int money = (moneyAmount * 100).toInt();
 
     // Validations
@@ -135,6 +135,13 @@ class _MyDonationScreenState extends State<MyDonationScreen> {
       return;
     }
 
+    if (foodDetail.isNotEmpty){
+      donated_item = foodDetail;
+    }else if(medicalDetail.isNotEmpty){
+      donated_item = medicalDetail;
+    }else if(!moneyAmount.isNaN){
+      donated_item = moneyAmount.toString();
+    }
     // API Check
     http.post(
       Uri.parse('${MyConfig.baseUrl}/pawpal/api/check_donation.php'),
@@ -142,6 +149,7 @@ class _MyDonationScreenState extends State<MyDonationScreen> {
         'user_id': widget.user?.user_id.toString(),
         'pet_id': widget.pet?.petId.toString(),
         'type': selectedDonationType,
+        'donated': donated_item,
       },
     ).then((response) {
       if (response.statusCode == 200) {
@@ -149,20 +157,20 @@ class _MyDonationScreenState extends State<MyDonationScreen> {
         if (jsonResponse['status'] == 'success') {
           if (!mounted) return;
           
-          if (selectedDonationType == "Money") {
-            Navigator.push(
-              context,
-              MaterialPageRoute(
-                builder: (context) => PaymentScreen(
-                  user: widget.user!,
-                  money: money,
-                ),
-              ),
-            );
-          } else {
-            _showSnack('Thank you for your contribution!');
-            Navigator.pop(context);
-          }
+          // if (selectedDonationType == "Money") {
+          //   Navigator.push(
+          //     context,
+          //     MaterialPageRoute(
+          //       builder: (context) => PaymentScreen(
+          //         user: widget.user!,
+          //         money: money,
+          //       ),
+          //     ),
+          //   );
+          // } else {
+          //   _showSnack('Thank you for your contribution!');
+          //   Navigator.pop(context);
+          // }
         } else {
           _showSnack(jsonResponse['message'] ?? 'Check failed');
         }

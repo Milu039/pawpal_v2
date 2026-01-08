@@ -8,8 +8,6 @@ class User {
   String? phone;
   String? reg_date;
   String? profile_image;
-  int? money;
-
   User(
       {this.user_id,
       this.name,
@@ -18,7 +16,6 @@ class User {
       this.phone,
       this.reg_date,
       this.profile_image,
-      this.money
       });
 
   User.fromJson(Map<String, dynamic> json) {
@@ -29,8 +26,6 @@ class User {
     phone = json['phone'];
     reg_date = json['reg_date'];
     profile_image = json['profile_image'];
-
-    money = int.parse(json['money']);
   }
 
   Map<String, dynamic> toJson() {
@@ -42,8 +37,6 @@ class User {
     data['phone'] = phone;
     data['reg_date'] = reg_date;
     data['profile_image'] = profile_image;
-
-    data['money'] = money;
     return data;
   }
 }

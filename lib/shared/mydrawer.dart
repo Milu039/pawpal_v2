@@ -8,6 +8,8 @@ import 'package:pawpal_v2/views/main_screen.dart';
 import 'package:pawpal_v2/views/home_screen.dart';
 import 'package:pawpal_v2/views/MyProfile_screen.dart';
 import 'package:pawpal_v2/myconfig.dart';
+import 'package:pawpal_v2/views/my_donation_screen.dart';
+import 'package:pawpal_v2/views/mydonation_screen.dart';
 
 class MyDrawer extends StatefulWidget {
   final User? user;
@@ -74,17 +76,17 @@ class _MyDrawerState extends State<MyDrawer> {
               );
             },
           ),
-          // ListTile(
-          //   leading: Icon(Icons.settings),
-          //   title: Text('Settings'),
-          //   onTap: () {
-          //     Navigator.pop(context);
-          //     Navigator.pushReplacement(
-          //       context,
-          //       AnimatedRoute.slideFromRight(SettingPage(user: widget.user)),
-          //     );
-          //   },
-          // ),
+          ListTile(
+            leading: Icon(Icons.settings),
+            title: Text('My Donations'),
+            onTap: () {
+              Navigator.pop(context);
+              Navigator.pushReplacement(
+                context,
+                AnimatedRoute.slideFromRight(MydonationScreen(user: widget.user)),
+              );
+            },
+          ),
           ListTile(
             leading: Icon(Icons.person),
             title: Text('Profile'),
