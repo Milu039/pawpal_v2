@@ -5,9 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:pawpal_v2/models/user.dart';
 import 'package:pawpal_v2/myconfig.dart';
 import 'package:pawpal_v2/shared/mydrawer.dart';
-
-// Import your new model here
-// import 'package:pawpal_v2/models/donation.dart'; 
+import 'package:pawpal_v2/models/donation.dart'; 
 
 class DonationHistoryScreen extends StatefulWidget {
   final User? user;
@@ -54,43 +52,6 @@ class DonationHistoryScreenState extends State<DonationHistoryScreen> {
       body: Center(
         child: Column(
           children: [
-            const SizedBox(height: 12),
-            // SEARCH AND FILTER ROW
-            Row(
-              children: [
-                Padding(
-                  padding: const EdgeInsets.all(8.0),
-                  child: SizedBox(
-                    width: screenWidth * 0.55,
-                    child: SearchBar(
-                      controller: searchController,
-                      onSubmitted: (value) {
-                        curpage = 1;
-                        loadDonations(value);
-                      },
-                      leading: const Icon(Icons.search),
-                      hintText: "Search pets...",
-                    ),
-                  ),
-                ),
-                DropdownMenu<String>(
-                  initialSelection: selectedCategory,
-                  onSelected: (String? value) {
-                    setState(() {
-                      selectedCategory = value!;
-                      curpage = 1;
-                      loadDonations(searchController.text);
-                    });
-                  },
-                  dropdownMenuEntries: const [
-                    DropdownMenuEntry(value: '', label: 'All'),
-                    DropdownMenuEntry(value: 'Adoption', label: 'Adoption'),
-                    DropdownMenuEntry(value: 'Donation', label: 'Donation'),
-                    DropdownMenuEntry(value: 'Rescue', label: 'Rescue'),
-                  ],
-                ),
-              ],
-            ),
             const SizedBox(height: 12),
             // LIST VIEW AREA
             listDonations.isEmpty

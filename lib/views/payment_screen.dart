@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:pawpal_v2/models/user.dart';
-// import 'package:webview_flutter/webview_flutter.dart';
+import 'package:webview_flutter/webview_flutter.dart';
 import 'package:pawpal_v2/myconfig.dart';
 
 class PaymentScreen extends StatefulWidget {
@@ -14,7 +14,7 @@ class PaymentScreen extends StatefulWidget {
 
 class _PaymentScreenState extends State<PaymentScreen> {
 
-  // late WebViewController _webcontroller;
+  late WebViewController _webcontroller;
   late double screenHeight, screenWidth, resWidth;
   late String userName, userEmail, userPhone, userID;
 
@@ -26,13 +26,13 @@ class _PaymentScreenState extends State<PaymentScreen> {
 
     userID = widget.user!.user_id.toString();
     super.initState();
-    // _webcontroller = WebViewController()
-    //   ..setJavaScriptMode(JavaScriptMode.unrestricted)
-    //   ..loadRequest(
-    //     Uri.parse(
-    //       '${MyConfig.baseUrl}/pawpal/api/payment.php?email=$userEmail&phone=$userPhone&userid=$userID&name=$userName&credits=${widget.money}',
-    //     ),
-    //   );
+    _webcontroller = WebViewController()
+      ..setJavaScriptMode(JavaScriptMode.unrestricted)
+      ..loadRequest(
+        Uri.parse(
+          '${MyConfig.baseUrl}/pawpal/api/payment.php?email=$userEmail&phone=$userPhone&userid=$userID&name=$userName&credits=${widget.money}',
+        ),
+      );
   }
 
   @override
@@ -42,7 +42,7 @@ class _PaymentScreenState extends State<PaymentScreen> {
         title: const Text("Payment"),
         backgroundColor: const Color(0xFF1F3C88),
       ),
+      body: WebViewWidget(controller: _webcontroller),
     );
-
   }
 }

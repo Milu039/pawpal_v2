@@ -157,20 +157,20 @@ class _MyDonationScreenState extends State<MyDonationScreen> {
         if (jsonResponse['status'] == 'success') {
           if (!mounted) return;
           
-          // if (selectedDonationType == "Money") {
-          //   Navigator.push(
-          //     context,
-          //     MaterialPageRoute(
-          //       builder: (context) => PaymentScreen(
-          //         user: widget.user!,
-          //         money: money,
-          //       ),
-          //     ),
-          //   );
-          // } else {
-          //   _showSnack('Thank you for your contribution!');
-          //   Navigator.pop(context);
-          // }
+          if (selectedDonationType == "Money") {
+            Navigator.push(
+              context,
+              MaterialPageRoute(
+                builder: (context) => PaymentScreen(
+                  user: widget.user!,
+                  money: money,
+                ),
+              ),
+            );
+          } else {
+            _showSnack('Thank you for your contribution!');
+            Navigator.pop(context);
+          }
         } else {
           _showSnack(jsonResponse['message'] ?? 'Check failed');
         }
