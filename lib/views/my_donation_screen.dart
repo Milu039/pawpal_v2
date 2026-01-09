@@ -121,7 +121,7 @@ class _MyDonationScreenState extends State<MyDonationScreen> {
     String medicalDetail = medicalDetailsController.text.trim();
     double moneyAmount = double.tryParse(moneyAmountController.text.trim()) ?? 0;
     String donated_item = "";
-    int money = moneyAmount.toInt();
+    int money = (moneyAmount*100).toInt();
 
     // Validations
     if (selectedDonationType == "Food" && foodDetail.isEmpty) {

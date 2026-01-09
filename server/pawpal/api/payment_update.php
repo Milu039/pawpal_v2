@@ -2,15 +2,17 @@
 //error_reporting(0);
 include_once("dbconnect.php");
 
-$xkey = '2850b0be02d82da4ef2e82aabb1e60d8485329c8ff260da61c4687448bd58d0ec160ed6793c7b60ac168cce513aff823611842dd77de6526ec1feec91a56ce34';
+$xkey = 'your_xkey';
 
 $category = $_GET['category'];
 $petid = $_GET['petid'];
 $email = $_GET['email']; 
 $phone = $_GET['phone']; 
 $name = $_GET['name']; 
-$credit = $_GET['credit']; 
+$credit = ($_GET['credit']/100); 
 $userid = $_GET['userid'];
+
+
 
 $data = array(
     'id' =>  $_GET['billplz']['id'],

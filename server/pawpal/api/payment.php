@@ -21,10 +21,10 @@ $data = array(
     'email' => $email,
     'mobile' => $phone,
     'name' => $name,
-    'amount' => $credit *  100, 
+    'amount' => $credit, 
     'description' => 'Payment for '.$userid,
-    'callback_url' => "your_domain/payment_update.php",
-    'redirect_url' => "your_domain/pawpal/api/payment_update.php?userid=$userid&email=$email&name=$name&phone=$phone&credit=$credit&petid=$petid&category=$category" 
+    'callback_url' => "https://your_domain/pawpal/api/payment_update.php",
+    'redirect_url' => "https://your_domain/pawpal/api/payment_update.php?userid=$userid&email=$email&name=$name&phone=$phone&credit=$credit&petid=$petid&category=$category" 
 );
 
 
