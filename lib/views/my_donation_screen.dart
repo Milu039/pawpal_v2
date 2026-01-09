@@ -148,8 +148,8 @@ class _MyDonationScreenState extends State<MyDonationScreen> {
       body: {
         'user_id': widget.user?.user_id.toString(),
         'pet_id': widget.pet?.petId.toString(),
-        'type': selectedDonationType,
-        'donated': donated_item,
+        'category': selectedDonationType,
+        'donate': donated_item,
       },
     ).then((response) {
       if (response.statusCode == 200) {
@@ -163,7 +163,9 @@ class _MyDonationScreenState extends State<MyDonationScreen> {
               MaterialPageRoute(
                 builder: (context) => PaymentScreen(
                   user: widget.user!,
-                  money: money,
+                  money: money, 
+                  pet: widget.pet!, 
+                  category: selectedDonationType, 
                 ),
               ),
             );

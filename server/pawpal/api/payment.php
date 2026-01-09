@@ -1,12 +1,16 @@
+
+text/x-generic payment.php ( PHP script, ASCII text, with CRLF line terminators )
 <?php
 error_reporting(0);
 //include_once("dbconnect.php");
 
-$email = $_GET['email']; //email
+$email = $_GET['email']; 
 $phone = $_GET['phone']; 
 $name = $_GET['name']; 
 $credit = $_GET['credits']; 
 $userid = $_GET['userid'];
+$petid = $_GET['petid'];    
+$category = $_GET['category']; 
 
 
 $api_key = '43a5ca4b-0426-4a86-bba0-6187c107d0aa';
@@ -15,14 +19,14 @@ $host = 'https://www.billplz-sandbox.com/api/v3/bills';
 
 
 $data = array(
-          'collection_id' => $collection_id,
-          'email' => $email,
-          'mobile' => $phone,
-          'name' => $name,
-          'amount' => $credit * 100, 
-		  'description' => 'Payment for '.$userid,
-          'callback_url' => "http://yourdomain.com/myfuwu/api/return_url",
-          'redirect_url' => "http://yourdomain.com/myfuwu/api/payment_update.php?userid=$userid&email=$email&name=$name&phone=$phone&credit=$credit&userid=$userid" 
+    'collection_id' => $collection_id,
+    'email' => $email,
+    'mobile' => $phone,
+    'name' => $name,
+    'amount' => $credit * 100, 
+    'description' => 'Payment for '.$userid,
+    'callback_url' => "https://canorcannot.com/JIACHING/pawpal/api/return_url",
+    'redirect_url' => "https://canorcannot.com/JIACHING/pawpal/api/payment_update.php?userid=$userid&email=$email&name=$name&phone=$phone&credit=$credit&petid=$petid&category=$category" 
 );
 
 

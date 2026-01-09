@@ -2,11 +2,13 @@
 //error_reporting(0);
 include_once("dbconnect.php");
 
-$email = $_GET['email']; //email
-$phone = $_GET['phone']; 
-$name = $_GET['name']; 
-$credit = $_GET['credit']; 
 $userid = $_GET['userid'];
+$petid = $_GET['petid'];
+$category = $_GET['category'];
+$credit = $_GET['credit']; 
+$name = $_GET['name'];
+$email = $_GET['email'];
+$phone = $_GET['phone'];
 
 $data = array(
     'id' =>  $_GET['billplz']['id'],
@@ -37,7 +39,7 @@ if ($signed === $data['x_signature']) {
     if ($paidstatus == "Success"){ //payment success
     
         //update credit here
-        $sqlupdatecredit = "UPDATE `tbl_users` SET `user_credit` = `user_credit` + '$credit' WHERE `user_id` = '$userid'";
+        $sqlinsertdonation = "INSERT INTO `tbl_donations` (`user_id`, `pet_id`, `category`, `donate`) VALUES ('$userid', '$petid', '$category', '$credit')";
         if ($conn->query($sqlupdatecredit) === TRUE){
              //print receipt for success transaction
             echo "

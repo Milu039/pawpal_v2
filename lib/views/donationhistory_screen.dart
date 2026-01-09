@@ -102,7 +102,7 @@ class DonationHistoryScreenState extends State<DonationHistoryScreen> {
                                       ),
                                       const SizedBox(height: 4),
                                       Text(
-                                        "Donated: RM ${donation['donate']}",
+                                        "Donated: ${donation['donate']}",
                                         style: const TextStyle(fontSize: 15, color: Colors.green, fontWeight: FontWeight.w600),
                                       ),
                                       const SizedBox(height: 4),

@@ -1,25 +1,22 @@
 <?php
 header("Access-Control-Allow-Origin: *"); 
-header('Content-Type: application/json'); // Ensure the browser/app knows it is JSON
+header('Content-Type: application/json');
 include 'dbconnect.php';
 
 if($_SERVER['REQUEST_METHOD'] == 'POST') {
     
-    // Check if required POST data exists to avoid PHP "Undefined index" notices
-    if (!isset($_POST['user_id']) || !isset($_POST['pet_id'])) {
-        echo json_encode(array(
-            'status' => 'failed',
-            'message' => 'Required parameters are missing.'
-        ));
+    // Updated to include 'category' and 'donate' (the item description/amount)
+    if (!isset($_POST['user_id']) || !isset($_POST['pet_id']) || !isset($_POST['category']) || !isset($_POST['donate'])) {
+        echo json_encode(array('status' => 'failed', 'message' => 'Required parameters are missing.'));
         exit();
     }
 
-    $user_id = $_POST['user_id'];
-    $pet_id = $_POST['pet_id'];
-    $selectedDonationType = $_POST['type'];
-    $donated = $_POST['donated'];
+    $user_id  = $_POST['user_id'];
+    $pet_id   = $_POST['pet_id'];
+    $category = $_POST['category'];
+    $donate   = $_POST['donate'];
 
-    // 1. Prepare and execute the ownership check
+    // 1. Ownership Check: Prevent users from donating to their own pet
     $checkSql = "SELECT * FROM tbl_pets WHERE user_id = ? AND pet_id = ?";
     $checkStmt = $conn->prepare($checkSql);
     $checkStmt->bind_param("ii", $user_id, $pet_id);
@@ -27,32 +24,32 @@ if($_SERVER['REQUEST_METHOD'] == 'POST') {
     $result = $checkStmt->get_result();
 
     if ($result->num_rows > 0) {
-        // User IS the owner - prevent donation
-        echo json_encode(array(
-            'status' => 'failed',
-            'message' => 'You are the owner of this pet. You cannot donate to your own listing.'
-        ));
-    } else {
-        
-        $submitdonation = "INSERT INTO `tbl_donations`(`user_id`, `pet_id`, `category`, `donate`,) VALUES (?,?,?,?)";
-        $submitstmt = $conn->prepare($submitdonation);
-        $submitstmt->bind_param("iiss", $user_id, $pet_id, $selectedDonationType, $donated);
-        $submitstmt->execute();
+        echo json_encode(array('status' => 'failed', 'message' => 'You are the owner of this pet.'));
+        $checkStmt->close();
+        exit();
+    }
+    $checkStmt->close();
 
-        echo json_encode(array(
-            'status' => 'success',
-            'message' => 'Validation passed.'
-        ));
+    // 2. Handling Different Categories
+    if ($category == "Money") {
+        // For Money, we just return success so Flutter can proceed to PaymentScreen
+        echo json_encode(array('status' => 'success', 'message' => 'Proceed to payment.'));
+    } else {
+        // For Food/Medical, we insert directly into tbl_donations now
+        $insertSql = "INSERT INTO tbl_donations (user_id, pet_id, category, donate) VALUES (?, ?, ?, ?)";
+        $insertStmt = $conn->prepare($insertSql);
+        $insertStmt->bind_param("iiss", $user_id, $pet_id, $category, $donate);
+        
+        if ($insertStmt->execute()) {
+            echo json_encode(array('status' => 'success', 'message' => 'Donation recorded successfully.'));
+        } else {
+            echo json_encode(array('status' => 'failed', 'message' => 'Database error: ' . $insertStmt->error));
+        }
+        $insertStmt->close();
     }
 
-    // Clean up
-    $checkStmt->close();
     $conn->close();
 } else {
-    // Handle non-POST requests
-    echo json_encode(array(
-        'status' => 'failed',
-        'message' => 'Invalid request method.'
-    ));
+    echo json_encode(array('status' => 'failed', 'message' => 'Invalid request method.'));
 }
 ?>
