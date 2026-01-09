@@ -11,8 +11,8 @@ $petid = $_GET['petid'];
 $category = $_GET['category']; 
 
 
-$api_key = '43a5ca4b-0426-4a86-bba0-6187c107d0aa';
-$collection_id = '0u96dbb0';
+$api_key = 'your_api_key';
+$collection_id = 'your_collection_id';
 $host = 'https://www.billplz-sandbox.com/api/v3/bills';
 
 
@@ -21,10 +21,10 @@ $data = array(
     'email' => $email,
     'mobile' => $phone,
     'name' => $name,
-    'amount' => $credit * 100, 
+    'amount' => $credit *  100, 
     'description' => 'Payment for '.$userid,
-    'callback_url' => "https://canorcannot.com/JIACHING/pawpal/api/return_url",
-    'redirect_url' => "https://canorcannot.com/JIACHING/pawpal/api/payment_update.php?userid=$userid&email=$email&name=$name&phone=$phone&credit=$credit&petid=$petid&category=$category" 
+    'callback_url' => "your_domain/payment_update.php",
+    'redirect_url' => "your_domain/pawpal/api/payment_update.php?userid=$userid&email=$email&name=$name&phone=$phone&credit=$credit&petid=$petid&category=$category" 
 );
 
 

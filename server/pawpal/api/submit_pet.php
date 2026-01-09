@@ -19,7 +19,6 @@
 
     // Collect POST variables
     $userId = $_POST['user_id'];
-    //parse user id into int 
     $newuserId = (int)$userId;
     $petName = $_POST['pet_name'];
     $petType = $_POST['pet_type'];
@@ -47,6 +46,7 @@
 
                     $filename = "pet_" . $last_id . "_" . $index . ".png";
                     $path = "../assets/pets/" . $filename;
+
                     // Save the file to the folder
                     file_put_contents($path, $decodedImage);
 
