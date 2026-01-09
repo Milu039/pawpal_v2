@@ -1,5 +1,3 @@
-import 'dart:io';
-
 import 'package:flutter/material.dart';
 import 'package:pawpal_v2/models/user.dart';
 import 'package:pawpal_v2/shared/animated_route.dart';

@@ -5,7 +5,6 @@ import 'package:flutter/material.dart';
 import 'package:pawpal_v2/models/user.dart';
 import 'package:pawpal_v2/myconfig.dart';
 import 'package:pawpal_v2/shared/mydrawer.dart';
-import 'package:pawpal_v2/models/donation.dart'; 
 
 class DonationHistoryScreen extends StatefulWidget {
   final User? user;

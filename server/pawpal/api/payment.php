@@ -1,5 +1,3 @@
-
-text/x-generic payment.php ( PHP script, ASCII text, with CRLF line terminators )
 <?php
 error_reporting(0);
 //include_once("dbconnect.php");
@@ -25,7 +23,7 @@ $data = array(
     'name' => $name,
     'amount' => $credit * 100, 
     'description' => 'Payment for '.$userid,
-    'callback_url' => "https://canorcannot.com/JIACHING/pawpal/api/payment_update.php",
+    'callback_url' => "https://canorcannot.com/JIACHING/pawpal/api/return_url",
     'redirect_url' => "https://canorcannot.com/JIACHING/pawpal/api/payment_update.php?userid=$userid&email=$email&name=$name&phone=$phone&credit=$credit&petid=$petid&category=$category" 
 );
 
