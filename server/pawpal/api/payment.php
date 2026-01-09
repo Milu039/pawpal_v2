@@ -25,7 +25,7 @@ $data = array(
     'name' => $name,
     'amount' => $credit * 100, 
     'description' => 'Payment for '.$userid,
-    'callback_url' => "https://canorcannot.com/JIACHING/pawpal/api/return_url",
+    'callback_url' => "https://canorcannot.com/JIACHING/pawpal/api/payment_update.php",
     'redirect_url' => "https://canorcannot.com/JIACHING/pawpal/api/payment_update.php?userid=$userid&email=$email&name=$name&phone=$phone&credit=$credit&petid=$petid&category=$category" 
 );
 
