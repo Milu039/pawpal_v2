@@ -10,18 +10,20 @@ if($_SERVER['REQUEST_METHOD'] == 'POST') {
     $phone = $_POST['phone'];
     $image = $_POST['image'];
 
+    //sql for update user name and phone 
     $sqlUpdateProfile = "
         UPDATE tbl_users 
         SET name='$name', phone='$phone' 
         WHERE user_id='$user_id'
     ";
-
+    //check the image if no update keep empty values
     if($image == "NA") {
         $decodedimage = "NA";
     }else{
         $decodedimage = base64_decode($image);
     }
 
+    //run the update sql for image path if the update profile is success
     if ($conn->query($sqlUpdateProfile) === TRUE) {
         $path = "../assets/user_profile/user_profile_".$user_id.".png";
 			if ($decodedimage != "NA") {

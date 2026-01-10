@@ -64,6 +64,7 @@ class _MainScreenState extends State<MainScreen> {
                   padding: const EdgeInsets.all(8.0),
                   child: SizedBox(
                     width: screenWidth * 0.6,
+                    //search bar widget for search the relevent information
                     child: SearchBar(
                       padding: const WidgetStatePropertyAll<EdgeInsets>(
                         EdgeInsets.symmetric(horizontal: 16.0),
@@ -78,6 +79,7 @@ class _MainScreenState extends State<MainScreen> {
                     ),
                   ),
                 ),
+                //drop down for filter
                 DropdownMenu<String>(
                   initialSelection: selectedPetType,
                   onSelected: (String? value) {

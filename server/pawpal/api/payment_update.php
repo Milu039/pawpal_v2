@@ -9,7 +9,7 @@ $petid = $_GET['petid'];
 $email = $_GET['email']; 
 $phone = $_GET['phone']; 
 $name = $_GET['name']; 
-$credit = ($_GET['credit']/100); 
+$credit = ($_GET['credit']);  
 $userid = $_GET['userid'];
 
 

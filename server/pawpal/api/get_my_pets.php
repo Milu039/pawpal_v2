@@ -45,7 +45,8 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET') {
                OR p.category LIKE '%$search%'
                OR p.description LIKE '%$search%'
             ORDER BY p.pet_id DESC";
-    } else if (isset($_GET['type']) && !empty($_GET['type'])) {
+            
+    } else if (isset($_GET['type']) && !empty($_GET['type'])) { //filter logic
         $type = $conn->real_escape_string($_GET['type']);
         $sqlLoadPets = $baseQuery . "WHERE p.pet_type = '$type' ORDER BY p.pet_id DESC";
     }else {
